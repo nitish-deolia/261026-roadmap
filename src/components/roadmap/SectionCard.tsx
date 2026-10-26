@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { Icon } from "../Icon";
 import { SectionEditor } from "./SectionEditor";
 import { TodoRow } from "./TodoRow";
+import { TodoDetailDialog } from "./TodoDetailDialog";
+import { createTodoDetails } from "../../data/todoGuides";
 import { makeId } from "../../utils/ids";
 import type { RoadmapSection, Todo } from "../../types";
 
@@ -15,6 +17,8 @@ export function SectionCard({ section, index, onChange }: SectionCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingTodo, setIsAddingTodo] = useState(false);
   const [todoText, setTodoText] = useState("");
+  const [openTodoId, setOpenTodoId] = useState<string | null>(null);
+  const openTodo = section.todos.find((todo) => todo.id === openTodoId);
   const completedCount = section.todos.filter((todo) => todo.completed).length;
   const phaseNumber = String(index + 1).padStart(2, "0");
 
@@ -34,6 +38,7 @@ export function SectionCard({ section, index, onChange }: SectionCardProps) {
       id: makeId("todo"),
       text: trimmedText,
       completed: false,
+      details: undefined,
     };
     onChange({ ...section, todos: [...section.todos, todo] });
     setTodoText("");
@@ -114,12 +119,34 @@ export function SectionCard({ section, index, onChange }: SectionCardProps) {
             <TodoRow
               key={todo.id}
               todo={todo}
-              onToggle={() => updateTodo(todo.id, { completed: !todo.completed })}
+              onOpen={() => {
+                if (!todo.details) updateTodo(todo.id, { details: createTodoDetails(todo) });
+                setOpenTodoId(todo.id);
+              }}
               onChange={(text) => updateTodo(todo.id, { text })}
               onDelete={() => deleteTodo(todo.id)}
             />
           ))}
         </div>
+
+        {openTodo && (
+          <TodoDetailDialog
+            todo={openTodo.details ? openTodo : { ...openTodo, details: createTodoDetails(openTodo) }}
+            onClose={() => setOpenTodoId(null)}
+            onToggleSubtask={(stepId, subtaskId, completed) => {
+              if (!openTodo.details) return;
+              const steps = openTodo.details.steps.map((step) => step.id !== stepId ? step : {
+                ...step,
+                subtasks: step.subtasks.map((task) => task.id === subtaskId ? { ...task, completed } : task),
+              });
+              const parentCompleted = steps.every((step) => step.subtasks.every((task) => task.completed));
+              updateTodo(openTodo.id, {
+                details: { ...openTodo.details, steps },
+                completed: parentCompleted,
+              });
+            }}
+          />
+        )}
 
         {isAddingTodo ? (
           <form className="add-todo-form" onSubmit={addTodo}>

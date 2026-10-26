@@ -4,12 +4,12 @@ import type { Todo } from "../../types";
 
 type TodoRowProps = {
   todo: Todo;
-  onToggle: () => void;
+  onOpen: () => void;
   onChange: (text: string) => void;
   onDelete: () => void;
 };
 
-export function TodoRow({ todo, onToggle, onChange, onDelete }: TodoRowProps) {
+export function TodoRow({ todo, onOpen, onChange, onDelete }: TodoRowProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(todo.text);
 
@@ -49,11 +49,14 @@ export function TodoRow({ todo, onToggle, onChange, onDelete }: TodoRowProps) {
 
   return (
     <div className={`todo-row${todo.completed ? " is-done" : ""}`}>
-      <label className="todo-label">
-        <input className="todo-check" type="checkbox" checked={todo.completed} onChange={onToggle} />
+      <div className="todo-label">
+        <input className="todo-check" type="checkbox" checked={todo.completed} disabled aria-label={todo.completed ? "All sub-items complete" : "Complete all sub-items to finish"} />
         <span className="checkmark"><Icon name="check" /></span>
-        <span>{todo.text}</span>
-      </label>
+        <button className="todo-open" type="button" onClick={onOpen} aria-label={`Open learning steps for ${todo.text}`}>
+          <span>{todo.text}</span>
+          <small>{todo.details ? `${todo.details.steps.reduce((count, step) => count + step.subtasks.filter((task) => task.completed).length, 0)} / ${todo.details.steps.reduce((count, step) => count + step.subtasks.length, 0)} sub-items` : "Open learning steps"}</small>
+        </button>
+      </div>
       <div className="todo-actions">
         <button
           className="icon-button"

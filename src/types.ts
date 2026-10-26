@@ -2,6 +2,28 @@ export interface Todo {
   id: string;
   text: string;
   completed: boolean;
+  details?: TodoDetails;
+}
+
+export interface TodoDetails {
+  objective: string;
+  estimate: string;
+  deliverable: string;
+  steps: TodoStep[];
+  resources: { label: string; url: string }[];
+}
+
+export interface TodoStep {
+  id: string;
+  title: string;
+  summary: string;
+  subtasks: TodoSubtask[];
+}
+
+export interface TodoSubtask {
+  id: string;
+  text: string;
+  completed: boolean;
 }
 
 export interface RoadmapSection {
