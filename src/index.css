@@ -1,2 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
-:root{font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#f5f6f5;background:#10131b;font-synthesis:none;text-rendering:optimizeLegibility;font-optical-sizing:auto;font-weight:400;--ink:#10131b;--surface:#181d28;--surface-raised:#1d2430;--text:#f4f5f1;--muted:#a2a9b6;--line:#343b4a;--lime:#d9ff70;--mint:#75e5c1;--blue:#8bbcff;--violet:#c4a5ff;--orange:#ffb58a;--pink:#ff9db8;--mono:'DM Mono',ui-monospace,SFMono-Regular,monospace;font-synthesis:none;font-optical-sizing:auto;text-rendering:optimizeLegibility}*{box-sizing:border-box}html{min-width:320px;scroll-behavior:smooth}body{margin:0;min-width:320px;min-height:100vh;background:#10131b}button,input,textarea{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{color:inherit}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--lime);outline-offset:3px}::selection{background:#d9ff70;color:#11151e}#root{min-height:100vh}
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f5f6f5;
+  background: #10131b;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+  font-weight: 400;
+
+  --ink: #10131b;
+  --surface: #181d28;
+  --surface-raised: #1d2430;
+  --text: #f4f5f1;
+  --muted: #a2a9b6;
+  --line: #343b4a;
+  --lime: #d9ff70;
+  --mint: #75e5c1;
+  --blue: #8bbcff;
+  --violet: #c4a5ff;
+  --orange: #ffb58a;
+  --pink: #ff9db8;
+  --mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #10131b;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #11151e;
+  background: #d9ff70;
+}
+
+#root {
+  min-height: 100vh;
+}
