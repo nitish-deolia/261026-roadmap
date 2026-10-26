@@ -157,7 +157,7 @@ function RoadmapDetail({ roadmaps, setRoadmaps }: { roadmaps: Roadmap[]; setRoad
       <div className="phases">{activeRoadmap.sections.map((section, index) => <SectionCard key={section.id} section={section} index={index} onChange={(value) => sectionChanged(section.id, value)} />)}</div>
       {addingSection ? <SectionEditor onSave={addSection} onCancel={() => setAddingSection(false)} /> : <button className="add-section-button" type="button" onClick={() => setAddingSection(true)}><span className="add-section-icon"><Icon name="plus" /></span><span><b>Add a section</b><small>Add your own learning focus and todos</small></span><Icon name="arrow" /></button>}
     </section>
-    <section className="resource-section"><div className="section-intro"><div><TinyLabel>Keep learning</TinyLabel><h2>Official resources</h2></div><span className="resource-note">Checked for the roadmap</span></div><div className="resource-grid">{activeRoadmap.links.map((resource) => <a key={resource.label} href={resource.url} target="_blank" rel="noreferrer" className="resource-link"><span><small>{resource.tag}</small><b>{resource.label}</b></span><span className="external-mark">↗</span></a>)}</div></section>
+      <section className="resource-section"><div className="section-intro"><div><TinyLabel>Keep learning</TinyLabel><h2>Official resources</h2></div><span className="resource-note">Checked for the roadmap</span></div><div className="resource-grid">{activeRoadmap.links.map((resource) => <a key={resource.label} href={resource.url} target="_blank" rel="noopener noreferrer" className="resource-link"><span><small>{resource.tag}</small><b>{resource.label}</b></span><span className="external-mark">↗</span></a>)}</div></section>
   </main>;
 }
 
